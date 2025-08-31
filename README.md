@@ -160,24 +160,6 @@ Project documentation available in [`docs/`](docs/):
 - [Installation Guide](docs/installation.md) - Detailed installation instructions
 - [Privacy Policy](docs/privacy-policy.md) - Privacy compliance and user data handling
 
-### Project Architecture
-```
-src/
-├── background/          # Service worker & action routing
-├── content/            # Gesture capture & recognition
-│   ├── gesture-capture.ts      # Main gesture handling
-│   ├── exclusion-matcher.ts    # URL pattern matching
-│   └── overlay.ts              # Visual feedback
-├── options/            # Settings interface
-│   ├── options.html           # UI structure
-│   ├── options.ts            # Settings logic
-│   └── options.css           # Styling
-├── shared/             # Common utilities
-│   ├── types.ts              # TypeScript definitions
-│   ├── constants.ts          # Default settings
-│   └── utils.ts             # Helper functions
-└── assets/            # Icons & static resources
-```
 
 ### Key Technologies
 - **TypeScript** - Type-safe development
