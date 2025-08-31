@@ -214,7 +214,6 @@ QuickGestures is designed with privacy in mind:
 ## 💡 Feature Requests
 - Check existing [issues](../../issues) first
 - Describe the use case and expected behavior
-- Consider contributing the implementation!
 
 ---
 
@@ -236,6 +235,6 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 **⭐ Star this repository if QuickGestures enhances your browsing experience!**
 
-[Report Bug](../../issues) • [Request Feature](../../issues) • [Contribute](../../pulls)
+[Report Bug](../../issues) • [Request Feature](../../issues)
 
 </div>
