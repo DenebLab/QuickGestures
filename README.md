@@ -211,24 +211,7 @@ QuickGestures is designed with privacy in mind:
 
 ---
 
-## 🤝 Contributing
-
-We welcome contributions! Here's how you can help:
-
-### Reporting Issues
-- Use the [issue tracker](../../issues) to report bugs
-- Include Chrome version, extension version, and steps to reproduce
-- Screenshots or recordings are helpful for UI issues
-
-### Development Contributions
-1. **Fork** the repository
-2. **Create** a feature branch: `git checkout -b feature-name`
-3. **Make** your changes with proper TypeScript types
-4. **Test** thoroughly in Chrome
-5. **Commit** with clear messages
-6. **Submit** a pull request
-
-### Feature Requests
+## 💡 Feature Requests
 - Check existing [issues](../../issues) first
 - Describe the use case and expected behavior
 - Consider contributing the implementation!
