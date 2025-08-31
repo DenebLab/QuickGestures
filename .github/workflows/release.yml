@@ -1,0 +1,110 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - "production"
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (e.g., 1.0.11)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+      - id: semver
+        uses: ./.github/actions/semver-js
+        with:
+          mode: config-change
+          config_file: version.txt
+          tag_prefix: v
+      - name: Show version info
+        run: |
+          echo "Version:        ${{ steps.semver.outputs.version }}"
+          echo "Tag:            ${{ steps.semver.outputs.tag }}"
+          echo "SHA:            ${{ steps.semver.outputs.sha }}"
+          echo "ShortSHA:       ${{ steps.semver.outputs.short_sha }}"
+          echo "Branch:         ${{ steps.semver.outputs.branch }}"
+          echo "BuildDate(UTC): ${{ steps.semver.outputs.build_date_utc }}"
+          
+          # Validate version is not empty
+          if [ -z "${{ steps.semver.outputs.version }}" ]; then
+            echo "Error: Version output is empty"
+            exit 1
+          fi
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync versions
+        run: node scripts/version-sync.js
+        env:
+          TARGET_VERSION: ${{ steps.semver.outputs.version }}
+      - name: Create release tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # Check if tag already exists locally or remotely
+          TAG_NAME="v${{ steps.semver.outputs.version }}"
+          
+          # Delete local tag if it exists
+          git tag -d "$TAG_NAME" 2>/dev/null || true
+          
+          # Delete remote tag if it exists (ignore errors)
+          git push --delete origin "$TAG_NAME" 2>/dev/null || true
+          
+          # Create new tag
+          git tag "$TAG_NAME"
+          git push origin "$TAG_NAME"
+
+      - name: Build extension
+        run: npm run build
+
+      - name: Package extension
+        run: node scripts/package-extension.js
+
+      - name: Prepare release with filtered changelog
+        run: |
+          # Use the existing prepare-release script which filters SAVEPOINT commits
+          TARGET_VERSION="${{ steps.semver.outputs.version }}" node scripts/prepare-release.js
+          
+      - name: Debug release notes
+        run: |
+          echo "=== Checking if RELEASE_NOTES.md exists ==="
+          ls -la RELEASE_NOTES.md || echo "RELEASE_NOTES.md not found"
+          echo "=== Content of RELEASE_NOTES.md ==="
+          cat RELEASE_NOTES.md || echo "Cannot read RELEASE_NOTES.md"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.semver.outputs.version }}
+          name: QuickGestures v${{ steps.semver.outputs.version }}
+          body_path: RELEASE_NOTES.md
+          draft: false
+          prerelease: ${{ contains(steps.semver.outputs.version, 'beta') || contains(steps.semver.outputs.version, 'alpha') }}
+          files: |
+            quickgestures-*.zip
+            RELEASE_NOTES.md

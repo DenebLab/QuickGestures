@@ -1,0 +1,28 @@
+{
+  "name": "quickgestures",
+  "version": "0.1.39",
+  "description": "Chrome extension for mouse gestures",
+  "private": true,
+  "scripts": {
+    "build": "node esbuild.config.js",
+    "watch": "node esbuild.config.js --watch",
+    "clean": "rm -rf dist",
+    "dev": "npm run clean && npm run watch",
+    "local-build": "node scripts/local-build.js",
+    "version:sync": "node scripts/version-sync.js",
+    "package": "node scripts/package-extension.js",
+    "prepare-release": "node scripts/prepare-release.js",
+    "release": "npm run prepare-release && echo 'Release prepared! Push to production branch or create git tag to trigger GitHub Actions.'",
+    "release:production": "node scripts/release-to-production.js",
+    "release:tag": "npm run prepare-release && echo 'Create and push git tag to trigger release.'"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.268",
+    "@types/node": "^20.14.0",
+    "esbuild": ">=0.25.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

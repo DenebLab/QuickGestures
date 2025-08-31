@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickGestures Options</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>QuickGestures Options</h1>
+            <div class="global-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="globalEnabled">
+                    <span class="slider"></span>
+                </label>
+                <span>Extension Enabled</span>
+            </div>
+        </header>
+
+        <div class="main">
+            <nav class="sidebar">
+                <ul class="nav-list">
+                    <li class="nav-item active" data-section="mappings">
+                        <span class="nav-icon">
+                            <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 10C3 10 5.5 7 10 7C14.5 7 17 10 17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M7 13L10 16L13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="10" cy="10" r="1.5" fill="currentColor"/>
+                            </svg>
+                        </span>
+                        Gesture Mappings
+                    </li>
+                    <li class="nav-item" data-section="style">
+                        <span class="nav-icon">
+                            <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="10" cy="8" r="5" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M7 10L10 13L13 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <rect x="2" y="15" width="16" height="2" rx="1" fill="currentColor"/>
+                            </svg>
+                        </span>
+                        Appearance
+                    </li>
+                    <li class="nav-item" data-section="contexts">
+                        <span class="nav-icon">
+                            <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <circle cx="10" cy="4" r="1" fill="currentColor"/>
+                                <circle cx="16" cy="10" r="1" fill="currentColor"/>
+                                <circle cx="10" cy="16" r="1" fill="currentColor"/>
+                                <circle cx="4" cy="10" r="1" fill="currentColor"/>
+                            </svg>
+                        </span>
+                        Contexts
+                    </li>
+                    <li class="nav-item" data-section="search">
+                        <span class="nav-icon">
+                            <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="8.5" cy="8.5" r="4.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M12.5 12.5L16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        Search Engine
+                    </li>
+                    <li class="nav-item" data-section="exclusions">
+                        <span class="nav-icon">
+                            <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M6 6L14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        Exclusions
+                    </li>
+                    <li class="nav-item" data-section="utilities">
+                        <span class="nav-icon">
+                            <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.5 2L17 6.5L12.5 11L8 6.5L12.5 2Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M6 8L3 11L6 14L9 11L6 8Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M9 12L11 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M14 9L16 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        Utilities
+                    </li>
+                </ul>
+            </nav>
+
+            <main class="content">
+                <!-- Mappings Section -->
+                <section id="mappings-section" class="section active">
+                    <h2>Gesture Mappings</h2>
+                    <div class="context-switcher">
+                        <div class="context-tabs">
+                            <button class="context-tab active" data-context="page">Page Gestures</button>
+                            <button class="context-tab" data-context="link">Link Gestures</button>
+                            <button class="context-tab" data-context="selection">Selection Gestures</button>
+                        </div>
+                    </div>
+                    <div id="mappings-container">
+                        <!-- Mappings table will be generated here -->
+                    </div>
+                    <div class="add-mapping">
+                        <button id="add-mapping-btn" class="btn btn-primary">Add New Mapping</button>
+                    </div>
+                </section>
+
+                <!-- Style Section -->
+                <section id="style-section" class="section">
+                    <h2>Appearance</h2>
+                    <div class="setting-group">
+                        <label for="lineColor">Line Color:</label>
+                        <input type="color" id="lineColor" name="lineColor">
+                    </div>
+                    <div class="setting-group">
+                        <label for="lineWidth">Line Width:</label>
+                        <input type="range" id="lineWidth" name="lineWidth" min="1" max="10" step="1">
+                        <span id="lineWidthValue">4px</span>
+                    </div>
+                    <div class="setting-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="highContrast" name="highContrast">
+                            High Contrast Mode
+                        </label>
+                        <small>Adds shadow effects for better visibility</small>
+                    </div>
+                    <div class="setting-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="showContextChip" name="showContextChip">
+                            Show Context Indicator
+                        </label>
+                        <small>Display context name during gesture</small>
+                    </div>
+                    <div class="setting-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="showGestureName" name="showGestureName">
+                            Show Gesture Name
+                        </label>
+                        <small>Display gesture name during drawing</small>
+                    </div>
+                </section>
+
+                <!-- Contexts Section -->
+                <section id="contexts-section" class="section">
+                    <h2>Context Settings</h2>
+                    
+                    <div class="context-settings">
+                        <h3>Page Context (Right Mouse Button)</h3>
+                        <div class="setting-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="pageEnabled" name="pageEnabled">
+                                Enable Page Gestures
+                            </label>
+                        </div>
+                        <div class="setting-group">
+                            <label for="pageThreshold">Movement Threshold:</label>
+                            <input type="range" id="pageThreshold" name="pageThreshold" min="5" max="50" step="1">
+                            <span id="pageThresholdValue">16px</span>
+                        </div>
+                    </div>
+
+                    <div class="context-settings">
+                        <h3>Link Context (Left Mouse Button)</h3>
+                        <div class="setting-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="linkEnabled" name="linkEnabled">
+                                Enable Link Gestures
+                            </label>
+                        </div>
+                        <div class="setting-group">
+                            <label for="linkModifier">Activation Key:</label>
+                            <select id="linkModifier" name="linkModifier">
+                                <option value="none">No modifier required</option>
+                                <option value="alt">Alt + Left Click</option>
+                                <option value="ctrl">Ctrl + Left Click</option>
+                                <option value="shift">Shift + Left Click</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="context-settings">
+                        <h3>Selection Context (Left Mouse Button)</h3>
+                        <div class="setting-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="selectionEnabled" name="selectionEnabled">
+                                Enable Selection Gestures
+                            </label>
+                        </div>
+                        <div class="setting-group">
+                            <label for="selectionModifier">Activation Key:</label>
+                            <select id="selectionModifier" name="selectionModifier">
+                                <option value="none">No modifier required</option>
+                                <option value="alt">Alt + Left Click</option>
+                                <option value="ctrl">Ctrl + Left Click</option>
+                                <option value="shift">Shift + Left Click</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Search Section -->
+                <section id="search-section" class="section">
+                    <h2>Search Engine</h2>
+                    <div class="setting-group">
+                        <label for="searchProvider">Search Provider:</label>
+                        <select id="searchProvider" name="searchProvider">
+                            <option value="google">Google</option>
+                            <option value="bing">Bing</option>
+                            <option value="duckduckgo">DuckDuckGo</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </div>
+                    <div class="setting-group" id="customUrlGroup">
+                        <label for="customSearchUrl">Custom Search URL:</label>
+                        <input type="url" id="customSearchUrl" name="customSearchUrl" placeholder="https://example.com/search?q=%s">
+                        <small>Use %s where the search term should be inserted</small>
+                    </div>
+                </section>
+
+                <!-- Exclusions Section -->
+                <section id="exclusions-section" class="section">
+                    <h2>Site Exclusions</h2>
+                    <p>Disable QuickGestures on specific websites using wildcard patterns.</p>
+                    
+                    <div class="setting-group">
+                        <label for="exclusionPattern">Add Exclusion Pattern:</label>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" id="exclusionPattern" placeholder="*.example.com/*" style="flex: 1;">
+                            <button id="addExclusion" class="btn btn-primary">Add</button>
+                        </div>
+                        <small>Use * for wildcard matching. Examples: *.test.com/*, https://example.com/admin/*</small>
+                    </div>
+                    
+                    <div class="exclusions-list">
+                        <h3>Active Exclusions</h3>
+                        <ul id="exclusionsList" class="exclusions-list-items">
+                            <!-- Exclusions will be populated by JavaScript -->
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Utilities Section -->
+                <section id="utilities-section" class="section">
+                    <h2>Utilities</h2>
+                    <div class="utility-buttons">
+                        <button id="reset-settings" class="btn btn-warning">Reset to Defaults</button>
+                        <button id="export-settings" class="btn btn-secondary">Export Settings</button>
+                        <button id="import-settings" class="btn btn-secondary">Import Settings</button>
+                    </div>
+                    <input type="file" id="import-file" accept=".json" style="display: none;">
+                    
+                    <div class="info-section">
+                        <h3>About</h3>
+                        <p>QuickGestures v1.0.0</p>
+                        <p>Gesture-based browser automation for Chrome</p>
+                        <p><a href="#" id="help-link">Help & Documentation</a></p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <div id="add-mapping-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Mapping</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <label for="new-gesture">Gesture:</label>
+                    <input type="text" id="new-gesture" placeholder="e.g., LR, UD, LURD">
+                    <small>Use L/R/U/D for Left/Right/Up/Down</small>
+                </div>
+                <div class="setting-group">
+                    <label for="new-action">Action:</label>
+                    <select id="new-action">
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-mapping" class="btn btn-secondary">Cancel</button>
+                <button id="save-mapping" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="options.js"></script>
+</body>
+</html>
